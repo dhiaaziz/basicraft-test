@@ -15,14 +15,16 @@ class UserController extends Controller
     public function index()
     {
         // dd('test_user');
-        return view('users.index');
+        return view('admin.users.index');
     }
 
     public function fetch()
     {
         $users = \App\Models\User::all();
         // dd($users);
-        return response()->json($users);
+        return response()->json([
+            'data' => $users
+        ]);
         // return view('users.index');
     }
 

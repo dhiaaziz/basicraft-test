@@ -14,14 +14,17 @@ class BookController extends Controller
     public function index()
     {
         // dd('test_book');
-        return view('books.index');
+        return view('admin.books.index');
     }
 
     public function fetch()
     {
         $books = \App\Models\Book::all();
         // dd($books);
-        return response()->json($books);
+        return response()->json([
+
+            'data' => $books
+        ]);
         // return view('books.index');
     }
 

@@ -14,14 +14,16 @@ class MemberController extends Controller
     public function index()
     {
         // dd('test_member');
-        return view('members.index');
+        return view('admin.members.index');
     }
 
     public function fetch()
     {
         $members = \App\Models\Member::all();
         // dd($members);
-        return response()->json($members);
+        return response()->json([
+            'data' => $members
+        ]);
         // return view('members.index');
     }
 
@@ -51,7 +53,10 @@ class MemberController extends Controller
         $member->is_active = $request->is_active;
         $member->updated = now();
         $member->save();
-        return response()->json($member);
+
+        return response()->json([
+            'data' => 'Input member success'
+        ]);
     }
 
     public function destroy($id)

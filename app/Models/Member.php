@@ -19,7 +19,7 @@ class Member extends Model
     ];
 
     protected $casts = [
-        'dob' => 'datetime',
+        'dob' => 'date:d-m-Y',
         'created' => 'datetime',
         'updated' => 'datetime',
     ];
