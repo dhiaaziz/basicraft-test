@@ -47,7 +47,19 @@ Route::group([
             Route::get('/{book}/edit', 'edit')->name('books.edit');
             Route::put('/{book}/update', 'update')->name('books.update');
             Route::delete('/{book}/destroy', 'destroy')->name('books.destroy');
+
+            Route::get('/fetch_available', 'fetch_available')->name('books.fetch_available');
+            Route::get('/fetch_borrowed', 'fetch_borrowed')->name('books.fetch_borrowed');
         });
+        Route::controller('App\Http\Controllers\BooksOutController')->group(function () {
+            Route::get('/borrow', 'borrow_index')->name('books.borrow');
+            Route::post('/borrow_store', 'borrow_store')->name('books.borrow_store');
+            Route::get('/return', 'return_index')->name('books.return');
+            Route::post('/return_store', 'return_store')->name('books.return_store');
+        });
+
+        // Route::controller('')
+
         // Route::get('/', 'BookController@index');
         // Route::get('/create', 'BookController@create');
         // ->name('admin.users');
@@ -66,6 +78,8 @@ Route::group([
             Route::get('/{user}/edit', 'edit')->name('users.edit');
             Route::put('/{user}/update', 'update')->name('users.update');
             Route::delete('/{user}/destroy', 'destroy')->name('users.destroy');
+
+            
         });
         // Route::get('/', 'BookController@index');
         // Route::get('/create', 'BookController@create');
@@ -91,22 +105,22 @@ Route::group([
         // ->name('admin.users');
 });
 
-Route::group([
-    'prefix' => 'booksout', 
-    // 'middleware' => ['auth', 'verified']
-    ], function () {
-        Route::controller(BooksOutController::class)->group(function () {
-            Route::get('/', 'index')->name('booksout.index');
-            Route::get('/fetch', 'fetch')->name('booksout.fetch');
-            Route::get('/create', 'create')->name('booksout.create');
-            Route::post('/store', 'store')->name('booksout.store');
-            Route::get('/{booksout}/edit', 'edit')->name('booksout.edit');
-            Route::put('/{booksout}/update', 'update')->name('booksout.update');
-            Route::delete('/{booksout}/destroy', 'destroy')->name('booksout.destroy');
-        });
-        // Route::get('/', function () {
-        //     return view('booksout.index');
-        // })->name('booksout.index');
-});
+// Route::group([
+//     'prefix' => 'booksout', 
+//     // 'middleware' => ['auth', 'verified']
+//     ], function () {
+//         Route::controller(BooksOutController::class)->group(function () {
+//             Route::get('/', 'index')->name('booksout.index');
+//             Route::get('/fetch', 'fetch')->name('booksout.fetch');
+//             Route::get('/create', 'create')->name('booksout.create');
+//             Route::post('/store', 'store')->name('booksout.store');
+//             Route::get('/{booksout}/edit', 'edit')->name('booksout.edit');
+//             Route::put('/{booksout}/update', 'update')->name('booksout.update');
+//             Route::delete('/{booksout}/destroy', 'destroy')->name('booksout.destroy');
+//         });
+//         // Route::get('/', function () {
+//         //     return view('booksout.index');
+//         // })->name('booksout.index');
+// });
 
 require __DIR__.'/auth.php';

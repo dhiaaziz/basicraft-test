@@ -28,6 +28,37 @@ class BookController extends Controller
         // return view('books.index');
     }
 
+    //fetch available books
+    public function fetch_available()
+    {
+
+        $books = \App\Models\Book::whereNotIn('id_book', function($query){
+            $query->select('id_book')->from('books_outs')
+            ->whereNull('date_in_actual');
+        })->get();
+        // dd($books);
+        return response()->json([
+
+            'data' => $books
+        ]);
+        // return view('books.index');
+    }
+
+    //fetch borrowed books
+    public function fetch_borrowed()
+    {
+
+        $books = \App\Models\Book::whereIn('id_book', function($query){
+            $query->select('id_book')->from('books_outs')
+            ->whereNull('date_in_actual');
+        })->get();
+        // dd($books);
+        return response()->json([
+
+            'data' => $books
+        ]);
+        // return view('books.index');
+    }
     public function store(Request $request)
     {
         // dd($request->all());

@@ -28,4 +28,9 @@ class Book extends Model
     // id
     protected $primaryKey = 'id_book';
     public $timestamps = false;
+
+    public function booksOut()
+    {
+        return $this->hasMany(BooksOut::class, 'id_book');
+    }
 }

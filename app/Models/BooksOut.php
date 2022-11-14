@@ -29,4 +29,21 @@ class BooksOut extends Model
         'updated' => 'datetime',
     ];
 
+    protected $primary = 'id_books_out';
+
+    public function book()
+    {
+        return $this->belongsTo(Books::class, 'id_book');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(Members::class, 'id_member');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
 }
